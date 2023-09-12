@@ -1,0 +1,85 @@
+#main-section {
+    border: 5px dashed red;
+    display:flex;
+    padding:15px;
+    width:90vw;     
+    min-height: 750px;    
+}
+
+.card{
+    border-style: solid;
+    border-color: var(--tertiary-color);
+    width: auto;
+    height: auto;
+    margin: 25px;
+    z-index: 1;
+    flex: 1 1 300px;        
+}
+
+#questionbox{
+    flex: 3;
+}
+
+#aside{
+    display: flex;
+    flex-direction: column;
+    flex: 2;
+}
+
+#timercard{
+    height: 150px;
+    flex: 2;
+}
+
+#scoreboard{
+    height: auto;
+    flex: 3;
+}
+
+#timer{
+    
+    border: red dashed 5px;
+    height: 65%;
+    width: auto;
+    margin: 25px;
+    position: relative;
+    top: -30px;
+}
+
+.card-header{
+    display: flex;
+    border-style: solid;
+    position: relative;
+    top: -30px;
+    margin: 10px 10px;
+    justify-content: space-around;
+    border-radius: 6px;
+    align-items: center;
+    height: 45px;
+}
+
+.card-section{    
+    height: 250px;
+    width: 250px;     
+    position: relative;
+    top: -30px;   
+}
+
+.card-section div{  
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 0 0;      
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+*{
+    background-color: slategray;
+}
+
+h2{
+    margin: 0px;
+}
