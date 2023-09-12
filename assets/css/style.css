@@ -1,3 +1,10 @@
+h2{
+    margin: 0px;
+}
+h3{
+    margin: 0px;
+}
+
 #main-section {
     border: 5px dashed red;
     display:flex;
@@ -8,12 +15,18 @@
 
 .card{
     border-style: solid;
-    border-color: var(--tertiary-color);
-    width: auto;
-    height: auto;
+    border-color: var(--tertiary-color);    
     margin: 25px;
-    z-index: 1;
-    flex: 1 1 300px;        
+    display: flex;
+    flex-direction: column;
+
+}
+
+#question-header{
+    border: white dashed 3px;
+}
+#question-header h3{
+    margin: 0px;
 }
 
 #questionbox{
@@ -36,15 +49,7 @@
     flex: 3;
 }
 
-#timer{
-    
-    border: red dashed 5px;
-    height: 65%;
-    width: auto;
-    margin: 25px;
-    position: relative;
-    top: -30px;
-}
+
 
 .card-header{
     display: flex;
@@ -59,16 +64,25 @@
 }
 
 .card-section{    
-    height: 250px;
-    width: 250px;     
+    border: red dashed 5px;
+    margin: 25px;
     position: relative;
-    top: -30px;   
+    top: -30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
 }
 
 .card-section div{  
     display: flex;
     justify-content: center;
     padding: 10px 0 0 0;      
+}
+
+.card-section h3{
+    margin-top: 25px;
 }
 
 main{
@@ -82,4 +96,18 @@ main{
 
 h2{
     margin: 0px;
+}
+h3{
+    margin: 0px;
+}
+
+button{
+    height: 75px;
+    width: 240px;
+}
+
+#button-div{
+    display: flex;
+    justify-content: center;
+    margin: 20px;
 }

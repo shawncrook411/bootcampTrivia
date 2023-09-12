@@ -14,7 +14,31 @@
                     <h2>
                         Question Box!
                     </h2>
-                </div>                   
+                </div>
+                <div class="card-section">
+                    <div id="question-header">
+                        <h3>Question <span id="question-count"># </span>!</h3>
+                    </div>
+                    <div>
+                        <h2>"insert question here"</h2>
+                    </div>
+                    <div>
+                        <button>A. <span id="a.">option a</span></button>
+                    </div>
+                    <div>
+                        <button>B. <span id="b.">option b</span></button>
+                    </div>
+                    <div>
+                        <button>C. <span id="c.">option c</span></button>
+                    </div>
+                    <div>
+                        <button>D. <span id="d.">option d</span></button>
+                    </div>
+                  
+                </div>
+                <div id="button-div">
+                    <button id="start-button"><span>Start!</span></button>
+                </div>
             </div>    
 
             <div id="aside">
@@ -24,8 +48,10 @@
                             Timer
                         </h2>
                     </div>
-                    <div id="timer">
-
+                    <div class="card-section" id="timer">
+                        <div>
+                            00:00s
+                        </div>
                     </div>
                 </div>
                 <div class="card" id="scoreboard">
@@ -34,22 +60,23 @@
                             Scoreboard!
                         </h2>
                     </div>
-                    <div>
-                        <h3>Total Wins!: <span></span></h3>
-                    </div>
-                    <div>
-                        <h3>Total Losses!: <span></span></h3>
-                    </div>                     
-                    <div>
+                    <div id="scoreboard-section" class="card-section">
+                        <h3>High Score! <span></span></h3>
+                        <ol>
+                            <li></li>
+                            <li></li>
+                            <li></li>
+                        </ol>
+                        <h3>Total Wins!: <span>#</span></h3>               
+                   
+                        <h3>Total Losses!: <span>#</span></h3>
+                    
                         <h3></h3>
                     </div>                                          
-                </div> 
-                
+                </div>                
             </div>  
         </section>
     </main>
-
-
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
