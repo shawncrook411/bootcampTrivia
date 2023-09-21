@@ -4,7 +4,7 @@ var questionCount = 0;
 var questionCountDisplay = document.getElementById("question-count")
 var startButtonDiv = document.getElementById("button-div")
 var startButton;
-var globalCounter = 10;
+var globalCounter = 15;
 var array = ["a.", "b.", "c.", "d.", "e."]
 var questionBox = document.getElementById('questionbox-section')
 var questionDisplay = document.getElementById('question')
@@ -27,7 +27,7 @@ question[1].answer[0] = "answer0"
 question[1].answer[1] = "answer1"
 question[1].answer[2] = "answer2"
 question[1].answer[3] = "answer3"
-question[1].correct = 1
+question[1].correct = 0
 
 question[2] = Object.create(question)
 question[2].text = "Question2"
@@ -45,7 +45,7 @@ question[3].answer[0] = "answer1"
 question[3].answer[1] = "answer1"
 question[3].answer[2] = "answer1"
 question[3].answer[3] = "answer1"
-question[3].correct = 1
+question[3].correct = 2
 
 question[4] = Object.create(question)
 question[4].text = "Question4"
@@ -54,7 +54,7 @@ question[4].answer[0] = "answer1"
 question[4].answer[1] = "answer1"
 question[4].answer[2] = "answer1"
 question[4].answer[3] = "answer1"
-question[4].correct = 1
+question[4].correct = 3
 
 question[5] = Object.create(question)
 question[5].text = "Question5"
@@ -63,7 +63,7 @@ question[5].answer[0] = "test0"
 question[5].answer[1] = "test1"
 question[5].answer[2] = "test2"
 question[5].answer[3] = "test3"
-question[5].correct = 1
+question[5].correct = 0
 
 
 
@@ -105,7 +105,38 @@ var setTimer = function() {
     }
 }   
 
+var checkQuestion = function (event) {
+
+    target = event.target;
+    target = target.getAttribute("id");
+
+    for(let i = 0; i < 4; i++)
+    {
+        if(target === array[i])
+        {
+            if(i === question[questionCount].correct)
+            {
+                console.log("correct")
+            }
+            else
+            {
+                console.log("incorrect")
+                count = count - 15;
+
+                if(count <= 0)
+                {
+                    gameResult = 0;
+                    gameEnds();
+                    return;
+                }
+            }
+        }
+    }
+    displayNextQuestion();
+}
+
 var displayNextQuestion = function() {
+
     
     if (questionCount === 0)
     {
@@ -139,7 +170,7 @@ var displayNextQuestion = function() {
 
         content = question[questionCount].answer[i]        
         answer.textContent = array[i] + " " + content
-        answer.addEventListener('click', displayNextQuestion)
+        answer.addEventListener('click', checkQuestion)
 
         answerDiv.appendChild(answer)
         questionBox.appendChild(answerDiv)
