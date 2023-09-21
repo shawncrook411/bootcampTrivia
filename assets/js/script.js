@@ -10,7 +10,18 @@ var questionBox = document.getElementById('questionbox-section')
 var questionDisplay = document.getElementById('question')
 var gameResult = 0;
 var timer;
+var wins;
+var lose;
 
+if(localStorage.getItem("wins") > 0)
+{wins = localStorage.getItem("wins")}
+else
+{wins = 0;}
+
+if(localStorage.getItem("lose"))
+{lose = localStorage.getItem("lose")}
+else
+{lose = 0;}
 
 var question = {
     text: '',
@@ -71,6 +82,7 @@ question[5].correct = 0
 
 var displayStartButton = function() {
 
+    
     startButton = document.createElement('button')
     startButton.setAttribute("id", "start-button")
     startButton.textContent = "Start!"
@@ -135,13 +147,7 @@ var checkQuestion = function (event) {
     displayNextQuestion();
 }
 
-var displayNextQuestion = function() {
-
-    
-    if (questionCount === 0)
-    {
-        questionCountDisplay.setAttribute("class", "displayBorder")
-    }
+var displayNextQuestion = function() {    
     
     buttonsDivs = questionBox.querySelectorAll('.answerDiv') 
     for(let i = 0; i < buttonsDivs.length; i++)
@@ -154,8 +160,7 @@ var displayNextQuestion = function() {
         gameResult = 1;
         gameEnds();
         return;
-    }
-      
+    }     
 
     questionCount++;
     questionCountDisplay.textContent = "Question #" + questionCount + "!";
@@ -174,12 +179,11 @@ var displayNextQuestion = function() {
 
         answerDiv.appendChild(answer)
         questionBox.appendChild(answerDiv)
-    }
-
-   
+    }   
 }
 
-var startGame = function() {
+var startGame = function() {    
+    questionCountDisplay.setAttribute("class", "displayBorder")
     gameResult = 0;
     questionCount = 0;
     setTimer();
@@ -188,11 +192,12 @@ var startGame = function() {
 }
 
 var gameEnds = function () {
-    displayStartButton();
+    
     questionCountDisplay.removeAttribute("class")
     if (gameResult === 1)
     {
         questionCountDisplay.textContent = "You've Won!"
+        wins++;
     }
     else{
         questionCountDisplay.textContent = "You've Lost!"
@@ -200,14 +205,21 @@ var gameEnds = function () {
         for(let i = 0; i < buttonsDivs.length; i++)
         {
             buttonsDivs[i].remove()
-        }   
+            
+        }
+        lose++;   
     }
     count = 0;
     clearInterval(timer)
-    timerDisplay.textContent = "00:00s"
-    
-}
+    timerDisplay.textContent = "00:00s"  
 
+    console.log(wins + " " + lose)
+
+    localStorage.setItem("wins", wins)
+    localStorage.setItem("lose", lose)
+    
+    displayStartButton();
+}
 
 displayStartButton();
 
