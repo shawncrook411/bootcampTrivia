@@ -19,11 +19,16 @@ h3{
     margin: 25px;    
 }
 
-#question-header{
-    border: white dashed 3px;
+#question-header{   
+    font-size: 30px;
 }
 #question-header h3{
     margin: 0px;
+}
+
+.displayBorder{
+    border: black solid 3px;
+    padding: 20px;
 }
 
 #questionbox{
