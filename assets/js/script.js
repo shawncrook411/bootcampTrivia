@@ -5,7 +5,7 @@ var questionCountDisplay = document.getElementById("question-count")
 var startButtonDiv = document.getElementById("button-div")
 var startButton;
 var resetButton = document.getElementById("reset");
-var globalCounter = 15;
+const globalCounter = 30;
 var array = ["a.", "b.", "c.", "d.", "e."]
 var questionBox = document.getElementById('questionbox-section')
 var questionDisplay = document.getElementById('question')
@@ -70,10 +70,6 @@ question[5].answer[3] = "test3"
 question[5].correct = 0
 
 
-
-
-
-
 var displayStartButton = function() {
 
     
@@ -86,21 +82,19 @@ var displayStartButton = function() {
 
 var setTimer = function() {
 
-    count = globalCounter;    
-
-  
-
-
-    timer = setInterval(countDown, 1000);
+    count = globalCounter * 10;
+    timer = setInterval(countDown, 100);
 
     function countDown() {
-        console.log(count);
-        var secondsDisplay = (count % 60)
+        
+        var deciSecondsDisplay = (count % 10)
+        var secondsDisplay = (((count - deciSecondsDisplay) % 600)/10)
         if (secondsDisplay < 10)
         {
             secondsDisplay = "0" + secondsDisplay // sets a placeholder 0... 1:07 example
         }
-        timerDisplay.textContent = "0" + (Math.floor(count / 60 )) + ":" + (secondsDisplay) + "s"; // displays minutes:seconds
+        
+        timerDisplay.textContent = "0" + (Math.floor(count / 600 )) + ":" + (secondsDisplay) + "." + deciSecondsDisplay + "s"; // displays minutes:seconds
         
         if (count <= 0 && gameResult === 0)
         {    
@@ -127,7 +121,7 @@ var checkQuestion = function (event) {
             else
             {
                 console.log("incorrect")
-                count = count - 15;
+                count = count - 150;
 
                 if(count <= 0)
                 {
@@ -193,21 +187,27 @@ var gameEnds = function () {
         questionCountDisplay.textContent = "You've Won!"
         wins++;
 
-        if (count > highScore1)
+        if ((globalCounter*10) - count < highScore1 || highScore1 == 0)
         {
             highScore3 = highScore2
             highScore2 = highScore1
-            highScore1 = count
+            highScore1 = (globalCounter*10 - count)
+            questionCountDisplay.textContent = "You've Won! New #1 High Score"
         }
-        else if (count > highScore2)
+        else if ((globalCounter*10) - count < highScore2 || highScore2 == 0)
         {
             highScore3 = highScore2
-            highScore2 = count
+            highScore2 = (globalCounter*10 - count)
+            questionCountDisplay.textContent = "You've Won! New #2 High Score"
+
         }
-        else if (count > highScore3)
+        else if ((globalCounter*10) - count < highScore3 || highScore3 == 0)
         {
-            highScore3 = count
+            highScore3 = (globalCounter*10 - count)
+            questionCountDisplay.textContent = "You've Won! New #3 High Score"
+
         }
+
         localStorage.setItem("HS1", highScore1)    
         localStorage.setItem("HS2", highScore2)
         localStorage.setItem("HS3", highScore3)    
@@ -241,19 +241,19 @@ var updateScoreBoard = function (){
     LOSE = document.getElementById("lose")
 
     if (highScore1 > 0)
-    {HS1.textContent = highScore1 + " seconds remaining"}
+    {HS1.textContent = (highScore1 - (highScore1 % 10))/10 + "." + highScore1 % 10 + " seconds elapsed"}
     else
-    {HS1.textContent = " "}
+    {HS1.textContent = " ... "}
 
     if (highScore2 > 0)
-    {HS2.textContent = highScore2 + " seconds remaining"}
+    {HS2.textContent = (highScore2 - (highScore2 % 10))/10 + "." + highScore2 % 10 + " seconds elapsed"}
     else
-    {HS2.textContent = " "}
+    {HS2.textContent = " ... "}
 
     if (highScore3 > 0)
-    {HS3.textContent = highScore3 + " seconds remaining"}
+    {HS3.textContent = (highScore3 - (highScore3 % 10))/10 + "." + highScore3 % 10 + " seconds elapsed"}
     else
-    {HS3.textContent = " "}
+    {HS3.textContent = " ... "}
 
     WIN.textContent = "Total Wins!: " + wins
     LOSE.textContent = "Total Losses!: " + lose
