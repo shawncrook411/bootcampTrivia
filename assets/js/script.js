@@ -12,13 +12,11 @@ var questionDisplay = document.getElementById('question')
 var gameResult = 0;
 var timer;
 
-
-
 var wins = localStorage.getItem("wins")
-
-
 var lose = localStorage.getItem("lose")
-
+var highScore1 = localStorage.getItem("HS1")
+var highScore2 = localStorage.getItem("HS2")
+var highScore3 = localStorage.getItem("HS3") 
 
 var question = {
     text: '',
@@ -194,6 +192,25 @@ var gameEnds = function () {
     {
         questionCountDisplay.textContent = "You've Won!"
         wins++;
+
+        if (count > highScore1)
+        {
+            highScore3 = highScore2
+            highScore2 = highScore1
+            highScore1 = count
+        }
+        else if (count > highScore2)
+        {
+            highScore3 = highScore2
+            highScore2 = count
+        }
+        else if (count > highScore3)
+        {
+            highScore3 = count
+        }
+        localStorage.setItem("HS1", highScore1)    
+        localStorage.setItem("HS2", highScore2)
+        localStorage.setItem("HS3", highScore3)    
     }
     else{
         questionCountDisplay.textContent = "You've Lost!"
@@ -207,9 +224,7 @@ var gameEnds = function () {
     }
     count = 0;
     clearInterval(timer)
-    timerDisplay.textContent = "00:00s"  
-
-    console.log(wins + " " + lose)
+    timerDisplay.textContent = "00:00s"
 
     localStorage.setItem("wins", wins)
     localStorage.setItem("lose", lose)
@@ -224,16 +239,42 @@ var updateScoreBoard = function (){
     HS3 = document.getElementById("HS3")
     WIN = document.getElementById("wins")
     LOSE = document.getElementById("lose")
+
+    if (highScore1 > 0)
+    {HS1.textContent = highScore1 + " seconds remaining"}
+    else
+    {HS1.textContent = " "}
+
+    if (highScore2 > 0)
+    {HS2.textContent = highScore2 + " seconds remaining"}
+    else
+    {HS2.textContent = " "}
+
+    if (highScore3 > 0)
+    {HS3.textContent = highScore3 + " seconds remaining"}
+    else
+    {HS3.textContent = " "}
+
     WIN.textContent = "Total Wins!: " + wins
     LOSE.textContent = "Total Losses!: " + lose
+    
 }
 
 var reset = function(){
-    console.log("reset High Score")
+    console.log("Reset High Score")
+
     wins = 0;
     lose = 0;
+    highScore1 = 0;
+    highScore2 = 0; 
+    highScore3 = 0;
+
     localStorage.setItem("wins", 0)
     localStorage.setItem("lose", 0)
+    localStorage.setItem("HS1", 0)    
+    localStorage.setItem("HS2", 0)
+    localStorage.setItem("HS3", 0)
+
     updateScoreBoard()
 }
 resetButton.addEventListener('click', reset)
