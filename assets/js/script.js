@@ -4,32 +4,27 @@ var questionCount = 0;
 var questionCountDisplay = document.getElementById("question-count")
 var startButtonDiv = document.getElementById("button-div")
 var startButton;
+var resetButton = document.getElementById("reset");
 var globalCounter = 15;
 var array = ["a.", "b.", "c.", "d.", "e."]
 var questionBox = document.getElementById('questionbox-section')
 var questionDisplay = document.getElementById('question')
 var gameResult = 0;
 var timer;
-var wins;
-var lose;
 
-if(localStorage.getItem("wins") > 0)
-{wins = localStorage.getItem("wins")}
-else
-{wins = 0;}
 
-if(localStorage.getItem("lose"))
-{lose = localStorage.getItem("lose")}
-else
-{lose = 0;}
+
+var wins = localStorage.getItem("wins")
+
+
+var lose = localStorage.getItem("lose")
+
 
 var question = {
     text: '',
     answer: [],
     correct: '', 
 }
-
-
 
 question[1] = Object.create(question)
 question[1].text = "Question2"
@@ -75,6 +70,7 @@ question[5].answer[1] = "test1"
 question[5].answer[2] = "test2"
 question[5].answer[3] = "test3"
 question[5].correct = 0
+
 
 
 
@@ -217,10 +213,33 @@ var gameEnds = function () {
 
     localStorage.setItem("wins", wins)
     localStorage.setItem("lose", lose)
-    
+
+    updateScoreBoard()
     displayStartButton();
 }
 
+var updateScoreBoard = function (){
+    HS1 = document.getElementById("HS1")
+    HS2 = document.getElementById("HS2")    
+    HS3 = document.getElementById("HS3")
+    WIN = document.getElementById("wins")
+    LOSE = document.getElementById("lose")
+    WIN.textContent = "Total Wins!: " + wins
+    LOSE.textContent = "Total Losses!: " + lose
+}
+
+var reset = function(){
+    console.log("reset High Score")
+    wins = 0;
+    lose = 0;
+    localStorage.setItem("wins", 0)
+    localStorage.setItem("lose", 0)
+    updateScoreBoard()
+}
+resetButton.addEventListener('click', reset)
+
+
+updateScoreBoard();
 displayStartButton();
 
 

@@ -124,3 +124,9 @@ button{
     position: relative;
     top: -60px;
 }
+
+#reset{
+    width: 60%;
+    position: relative;
+    top: 20px;
+}
