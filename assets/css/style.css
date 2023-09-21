@@ -26,7 +26,7 @@ h3{
 }
 
 .displayBorder{
-    border: black solid 3px;
+    border: rgb(255, 251, 0) solid 3px;
     padding: 20px;
 }
 
@@ -60,7 +60,7 @@ h3{
 }
 
 #questionbox-section{
-    height:80%
+    height:80%;
 }
 
 .card-header{
@@ -121,7 +121,9 @@ h3{
 
 button{
     height: 75px;
-    width: 240px;    
+    width: 240px; 
+    border: rgb(255, 251, 0) solid 3px;
+   
 }
 
 #button-div{

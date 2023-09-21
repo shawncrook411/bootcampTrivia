@@ -25,54 +25,52 @@ var question = {
 }
 
 question[1] = Object.create(question)
-question[1].text = "Question2"
+question[1].text = "Inside which HTML element do we put the JavaScript?"
 question[1].answer = []
-question[1].answer[0] = "answer0"
-question[1].answer[1] = "answer1"
-question[1].answer[2] = "answer2"
-question[1].answer[3] = "answer3"
-question[1].correct = 0
+question[1].answer[0] = "<javascript>"
+question[1].answer[1] = "<scripting>"
+question[1].answer[2] = "<js>"
+question[1].answer[3] = "<script>"
+question[1].correct = 3
 
 question[2] = Object.create(question)
-question[2].text = "Question2"
+question[2].text = "What is the correct way to write a JavaScript array?"
 question[2].answer = []
-question[2].answer[0] = "answer1"
-question[2].answer[1] = "answer1"
-question[2].answer[2] = "answer1"
-question[2].answer[3] = "answer1"
-question[2].correct = 1
+question[2].answer[0] = 'var colors = 1 = ("red"), 2 = ("green"), 3 = ("blue")'
+question[2].answer[1] = 'var colors = (1:"red", 2:"green", 3:"blue")'
+question[2].answer[2] = 'var colors = ["red", "green", "blue"]'
+question[2].answer[3] = 'var colors = "red", "green", "blue"'
+question[2].correct = 2
 
 question[3] = Object.create(question)
-question[3].text = "Question3"
+question[3].text = "JavaScript File Has An Extension of:"
 question[3].answer = []
-question[3].answer[0] = "answer1"
-question[3].answer[1] = "answer1"
-question[3].answer[2] = "answer1"
-question[3].answer[3] = "answer1"
-question[3].correct = 2
+question[3].answer[0] = ".Java"
+question[3].answer[1] = ".js"
+question[3].answer[2] = ".javascript"
+question[3].answer[3] = ".xml"
+question[3].correct = 1
 
 question[4] = Object.create(question)
-question[4].text = "Question4"
+question[4].text = "What will this output: console.log(3 > 2 > 1)"
 question[4].answer = []
-question[4].answer[0] = "answer1"
-question[4].answer[1] = "answer1"
-question[4].answer[2] = "answer1"
-question[4].answer[3] = "answer1"
-question[4].correct = 3
+question[4].answer[0] = "true"
+question[4].answer[1] = "false"
+question[4].answer[2] = "undefined"
+question[4].answer[3] = "none of the above"
+question[4].correct = 1
 
 question[5] = Object.create(question)
-question[5].text = "Question5"
+question[5].text = "Which of the following is correct about features of JavaScript?"
 question[5].answer = []
-question[5].answer[0] = "test0"
-question[5].answer[1] = "test1"
-question[5].answer[2] = "test2"
-question[5].answer[3] = "test3"
-question[5].correct = 0
+question[5].answer[0] =  "JavaScript is a lightweight, interpreted programming language"
+question[5].answer[1] = "JavaScript is designed for creating network-centric applications"
+question[5].answer[2] = "JavaScript is complementary to and integrated with Java"
+question[5].answer[3] = "All of the Above"
+question[5].correct = 3
 
 
-var displayStartButton = function() {
-
-    
+var displayStartButton = function() {    
     startButton = document.createElement('button')
     startButton.setAttribute("id", "start-button")
     startButton.textContent = "Start!"
@@ -151,7 +149,7 @@ var displayNextQuestion = function() {
     }     
 
     questionCount++;
-    questionCountDisplay.textContent = "Question #" + questionCount + "!";
+    questionCountDisplay.textContent = "Question #" + questionCount + "! " + question[questionCount].text;
     
     for (let i = 0; i < 4; i++)
     {
