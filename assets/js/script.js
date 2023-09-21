@@ -106,16 +106,19 @@ var displayNextQuestion = function() {
     {
         questionCountDisplay.setAttribute("class", "displayBorder")
     }
-
-    buttonsDivs = questionBox.querySelectorAll('.answerDiv')    
     
-    
-    console.log(buttonsDivs)
-
+    buttonsDivs = questionBox.querySelectorAll('.answerDiv') 
     for(let i = 0; i < buttonsDivs.length; i++)
     {
         buttonsDivs[i].remove()
     }   
+    
+    if (questionCount >= 5)
+    {
+       gameEnds();
+       return;
+    }
+      
 
     questionCount++;
     questionCountDisplay.textContent = "Question #" + questionCount + "!";
@@ -135,6 +138,8 @@ var displayNextQuestion = function() {
         answerDiv.appendChild(answer)
         questionBox.appendChild(answerDiv)
     }
+
+   
 }
 
 var startGame = function() {
@@ -146,7 +151,11 @@ var startGame = function() {
 
 var gameEnds = function () {
     displayStartButton();
+    questionCountDisplay.removeAttribute("class")
+    questionCountDisplay.textContent = "You've Won!"
+    
 }
+
 
 displayStartButton();
 
