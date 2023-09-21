@@ -8,6 +8,8 @@ var globalCounter = 10;
 var array = ["a.", "b.", "c.", "d.", "e."]
 var questionBox = document.getElementById('questionbox-section')
 var questionDisplay = document.getElementById('question')
+var gameResult = 0;
+var timer;
 
 
 var question = {
@@ -78,8 +80,12 @@ var displayStartButton = function() {
 
 var setTimer = function() {
 
-    var count = globalCounter;    
-    var timer = setInterval(countDown, 1000);
+    count = globalCounter;    
+
+  
+
+
+    timer = setInterval(countDown, 1000);
 
     function countDown() {
         console.log(count);
@@ -90,10 +96,9 @@ var setTimer = function() {
         }
         timerDisplay.textContent = "0" + (Math.floor(count / 60 )) + ":" + (secondsDisplay) + "s"; // displays minutes:seconds
         
-        if (count <= 0)
-        {
+        if (count <= 0 && gameResult === 0)
+        {    
             gameEnds();
-            clearInterval(timer)
             return;
         }
         count--;
@@ -115,8 +120,9 @@ var displayNextQuestion = function() {
     
     if (questionCount >= 5)
     {
-       gameEnds();
-       return;
+        gameResult = 1;
+        gameEnds();
+        return;
     }
       
 
@@ -143,6 +149,7 @@ var displayNextQuestion = function() {
 }
 
 var startGame = function() {
+    gameResult = 0;
     questionCount = 0;
     setTimer();
     displayNextQuestion();
@@ -152,7 +159,21 @@ var startGame = function() {
 var gameEnds = function () {
     displayStartButton();
     questionCountDisplay.removeAttribute("class")
-    questionCountDisplay.textContent = "You've Won!"
+    if (gameResult === 1)
+    {
+        questionCountDisplay.textContent = "You've Won!"
+    }
+    else{
+        questionCountDisplay.textContent = "You've Lost!"
+        buttonsDivs = questionBox.querySelectorAll('.answerDiv') 
+        for(let i = 0; i < buttonsDivs.length; i++)
+        {
+            buttonsDivs[i].remove()
+        }   
+    }
+    count = 0;
+    clearInterval(timer)
+    timerDisplay.textContent = "00:00s"
     
 }
 
