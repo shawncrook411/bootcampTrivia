@@ -14,9 +14,17 @@ var timer;
 
 var wins = localStorage.getItem("wins")
 var lose = localStorage.getItem("lose")
-var highScore1 = localStorage.getItem("HS1")
-var highScore2 = localStorage.getItem("HS2")
-var highScore3 = localStorage.getItem("HS3") 
+
+var highScore1 = [];
+var highScore2 = [];
+var highScore3 = [];
+
+highScore1[0] = localStorage.getItem("HS1")
+highScore2[0] = localStorage.getItem("HS2")
+highScore3[0] = localStorage.getItem("HS3")
+highScore1[1] = localStorage.getItem("int1")
+highScore2[1] = localStorage.getItem("int2")
+highScore3[1] = localStorage.getItem("int3")
 
 var question = {
     text: '',
@@ -177,6 +185,16 @@ var startGame = function() {
     startButton.remove()
 }
 
+var initialsPrompt = function () {
+    
+    value = window.prompt("What are your initials?")
+    while (value.length > 3)
+    {
+        value = window.prompt("Can not be longer than 3 letters, please type your Initials")
+    }
+    return value;
+}
+
 var gameEnds = function () {
     
     questionCountDisplay.removeAttribute("class")
@@ -185,30 +203,36 @@ var gameEnds = function () {
         questionCountDisplay.textContent = "You've Won!"
         wins++;
 
-        if ((globalCounter*10) - count < highScore1 || highScore1 == 0)
+        if ((globalCounter*10) - count < highScore1 || highScore1[0] == 0)
         {
-            highScore3 = highScore2
-            highScore2 = highScore1
-            highScore1 = (globalCounter*10 - count)
+            highScore1[1] = initialsPrompt()
+            highScore3[0] = highScore2[0]
+            highScore2[0] = highScore1[0]
+            highScore1[0] = (globalCounter*10 - count)
             questionCountDisplay.textContent = "You've Won! New #1 High Score"
         }
-        else if ((globalCounter*10) - count < highScore2 || highScore2 == 0)
+        else if ((globalCounter*10) - count < highScore2[0] || highScore2[0] == 0)
         {
-            highScore3 = highScore2
-            highScore2 = (globalCounter*10 - count)
+            highScore2[1] = initialsPrompt()
+            highScore3[0] = highScore2[0]
+            highScore2[0] = (globalCounter*10 - count)
             questionCountDisplay.textContent = "You've Won! New #2 High Score"
 
         }
-        else if ((globalCounter*10) - count < highScore3 || highScore3 == 0)
+        else if ((globalCounter*10) - count < highScore3[0] || highScore3[0] == 0)
         {
-            highScore3 = (globalCounter*10 - count)
+            highScore3[1] = initialsPrompt()
+            highScore3[0] = (globalCounter*10 - count)
             questionCountDisplay.textContent = "You've Won! New #3 High Score"
 
         }
 
-        localStorage.setItem("HS1", highScore1)    
-        localStorage.setItem("HS2", highScore2)
-        localStorage.setItem("HS3", highScore3)    
+        localStorage.setItem("HS1", highScore1[0])    
+        localStorage.setItem("HS2", highScore2[0])
+        localStorage.setItem("HS3", highScore3[0])
+        localStorage.setItem("int1", highScore1[1])
+        localStorage.setItem("int2", highScore2[1])
+        localStorage.setItem("int3", highScore3[1])
     }
     else{
         questionCountDisplay.textContent = "You've Lost!"
@@ -238,18 +262,18 @@ var updateScoreBoard = function (){
     WIN = document.getElementById("wins")
     LOSE = document.getElementById("lose")
 
-    if (highScore1 > 0)
-    {HS1.textContent = (highScore1 - (highScore1 % 10))/10 + "." + highScore1 % 10 + " seconds elapsed"}
+    if (highScore1[0] > 0)
+    {HS1.textContent = highScore1[1] + ": " + (highScore1[0] - (highScore1[0] % 10))/10 + "." + highScore1[0] % 10 + " seconds elapsed"}
     else
     {HS1.textContent = " ... "}
 
-    if (highScore2 > 0)
-    {HS2.textContent = (highScore2 - (highScore2 % 10))/10 + "." + highScore2 % 10 + " seconds elapsed"}
+    if (highScore2[0] > 0)
+    {HS2.textContent = highScore2[1] + ": " + (highScore2[0] - (highScore2[0] % 10))/10 + "." + highScore2[0] % 10 + " seconds elapsed"}
     else
     {HS2.textContent = " ... "}
 
-    if (highScore3 > 0)
-    {HS3.textContent = (highScore3 - (highScore3 % 10))/10 + "." + highScore3 % 10 + " seconds elapsed"}
+    if (highScore3[0] > 0)
+    {HS3.textContent = highScore3[1] + ": " + (highScore3[0] - (highScore3[0] % 10))/10 + "." + highScore3[0] % 10 + " seconds elapsed"}
     else
     {HS3.textContent = " ... "}
 
@@ -263,15 +287,21 @@ var reset = function(){
 
     wins = 0;
     lose = 0;
-    highScore1 = 0;
-    highScore2 = 0; 
-    highScore3 = 0;
+    highScore1[0] = 0;
+    highScore2[0] = 0; 
+    highScore3[0] = 0;
+    highScore1[1] = 0;
+    highScore2[1] = 0;
+    highScore3[1] = 0;    
 
     localStorage.setItem("wins", 0)
     localStorage.setItem("lose", 0)
     localStorage.setItem("HS1", 0)    
     localStorage.setItem("HS2", 0)
     localStorage.setItem("HS3", 0)
+    localStorage.setItem("int1", 0)
+    localStorage.setItem("int2", 0)
+    localStorage.setItem("int3", 0)    
 
     updateScoreBoard()
 }

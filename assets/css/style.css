@@ -20,6 +20,7 @@ h3{
 
 #question-header{   
     font-size: 30px;
+    width:1000px;
 }
 #question-header h3{
     margin: 0px;
@@ -139,3 +140,4 @@ button{
     position: relative;
     top: 20px;
 }
+
